@@ -271,3 +271,25 @@ namespace sdx {
     }
 
     
+
+    void TextBox::draw(sf::RenderWindow & window) {
+        time+=clock.restart();
+        if(focus){
+            if(time.asSeconds()>1) {time=sf::Time::Zero;
+                blinker.setFillColor(sf::Color::Black);
+            }
+            else if(time.asSeconds()>0.5) blinker.setFillColor(sf::Color::White);
+        }
+        else {
+            blinker.setFillColor(sf::Color::White);
+            if(time.asSeconds()>300) time=sf::Time::Zero;
+        }
+        if(focusChar==0) blinker.setPosition(posX+thickness+2,posY+thickness+1);
+        else blinker.setPosition(sf::Vector2f(inpText.get().findCharacterPos(focusChar).x, posY+thickness+1));
+        inpText.setText(getPinp);
+        window.draw(outerRect);
+        window.draw(innerRect);
+        window.draw(blinker);
+        window.draw(inpText.get());
+    }
+}

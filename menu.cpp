@@ -271,6 +271,7 @@ namespace sdx {
     }
 
     
+    
 
     void TextBox::draw(sf::RenderWindow & window) {
         time+=clock.restart();

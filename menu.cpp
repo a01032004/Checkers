@@ -160,3 +160,114 @@ namespace sdx {
         focus=false;
         charWidth=0;
     }
+    TextBox::TextBox(float x1, float x2, float y1, float y2, float z) : inpText("", y1+z+2, y2+z-1) {
+        outerRect.setSize(sf::Vector2f(x1,x2));
+        innerRect.setSize(sf::Vector2f(x1-2*z,x2-2*z));
+        outerRect.setPosition(sf::Vector2f(y1,y2));
+        innerRect.setPosition(sf::Vector2f(y1+z,y2+z));
+        outerRect.setFillColor(sf::Color::Black);
+        innerRect.setFillColor(sf::Color::White);
+
+        blinker.setSize(sf::Vector2f(1,x2-2*z-2));
+        blinker.setPosition(sf::Vector2f(y1+z+2,y2+z+1));
+        blinker.setFillColor(sf::Color::Black);
+
+        time=sf::Time::Zero;
+        textSize=(unsigned int)(x2-4-2*z);
+        getPinp="";
+        txtInp="";
+        thickness=z;
+        posX=y1;
+        posY=y2;
+        height=x2;
+        width=x1;
+        focusChar=0;
+        focus=false;
+        charWidth=0;
+
+        inpText.setSize(textSize);
+    }
+
+    void TextBox::setSize(float x, float y) {
+        height=y;
+        width=x;
+        textSize=(unsigned int)(y-4-2*thickness);
+        outerRect.setSize(sf::Vector2f(x,y));
+        innerRect.setSize(sf::Vector2f(x-2*thickness,y-2*thickness));
+        blinker.setSize(sf::Vector2f(1,y-2*thickness-2));
+        inpText.setSize(textSize);
+        inpText.setPosition(posX+thickness+2,posY+thickness-1);
+    }
+
+    void TextBox::setPosition(float x, float y) {
+        posX=x;
+        posY=y;
+        outerRect.setPosition(sf::Vector2f(x,y));
+        innerRect.setPosition(sf::Vector2f(x+thickness,y+thickness));
+        blinker.setPosition(sf::Vector2f(x+thickness+2,y+thickness+1));
+        inpText.setPosition(x+thickness+2,y+thickness-1);
+    }
+
+    void TextBox::setBorder(float x) {
+        thickness=x;
+        textSize=(unsigned int)(height-4-2*x);
+        innerRect.setSize(sf::Vector2f(width-2*x,height-2*x));
+        inpText.setSize(textSize);
+        setPosition(posX,posY);
+    }
+
+    sf::String TextBox::getCurrentText() { return getPinp; }
+
+    sf::String TextBox::getInput() { return txtInp; }
+
+
+
+    void TextBox::handleEvent(sf::Event & event)  {
+        if(event.type==sf::Event::TextEntered && focus) {
+            if((inpText.get().findCharacterPos(focusChar).x+1.2*textSize)<(width+posX) &&31<int(event.text.unicode) && 256>int(event.text.unicode)) {
+                if(focusChar==getPinp.getSize()) getPinp+=event.text.unicode;
+                else {
+                    getPinp=getPinp.substring(0,focusChar)+event.text.unicode+getPinp.substring(focusChar,getPinp.getSize()-focusChar);
+                }
+                focusChar++;
+            }
+        }
+        if(event.type==sf::Event::KeyPressed && focus) {
+            if(event.key.code==sf::Keyboard::BackSpace) {
+                if(focusChar!=0){
+                    getPinp.erase(focusChar-1,1);
+                    if(focusChar>0) focusChar--;
+                }
+            }
+            if(event.key.code==sf::Keyboard::Delete) {
+                if(focusChar!=getPinp.getSize()) {
+                    getPinp.erase(focusChar);
+                }
+            }
+            if(event.key.code==sf::Keyboard::Enter) {
+                if(getPinp.getSize()>0) txtInp=getPinp;
+                focusChar=0;
+                getPinp.clear();
+            }
+            else if(event.key.code==sf::Keyboard::Left) {
+                if(focusChar>0) {focusChar--;}
+            }
+            else if(event.key.code==sf::Keyboard::Right) {
+                if(focusChar<getPinp.getSize()) focusChar++;
+            }
+        }
+        if(event.type==sf::Event::MouseButtonPressed) {
+            if(event.mouseButton.button==sf::Mouse::Left) {
+                if(getPinp.getSize()>0) {
+                    if(charWidth==0) charWidth=inpText.get().findCharacterPos(1).x-inpText.get().findCharacterPos(0).x;
+                    unsigned int temp = (unsigned int)((event.mouseButton.x-posX)/charWidth);
+                    if(temp>getPinp.getSize()) focusChar=getPinp.getSize();
+                    else focusChar=temp;
+                }
+                if(event.mouseButton.x >posX && event.mouseButton.x <posX+width && event.mouseButton.y>posY && event.mouseButton.y<posY+height) focus = true;
+                else focus = false;
+            }
+        }
+    }
+
+    

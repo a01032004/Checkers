@@ -212,3 +212,133 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
 
 
 
+    while (Play.isOpen())
+    {
+
+
+
+        Event event_play;
+        while (Play.pollEvent(event_play))
+        {
+            if ((IntRect(690, 85, 50, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+                {
+                    CountUsers = 1;
+                    countUser1.setOutlineThickness(3);
+                    countUser1.setOutlineColor(sf::Color(237, 147, 0));
+                    countUser2.setOutlineThickness(0);
+                }
+
+            if ((IntRect(790, 85, 50, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                {
+                    CountUsers = 2;
+                    countUser2.setOutlineThickness(3);
+                    countUser2.setOutlineColor(sf::Color(237, 147, 0));
+                    countUser1.setOutlineThickness(0);
+                }
+
+            if ((IntRect(970, 195, 200, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                numberOfRound = 1;
+                fastPlay.setOutlineThickness(3);
+                fastPlay.setOutlineColor(sf::Color(237, 147, 0));
+            }
+
+            if ((IntRect(690, 195, 100, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                numberOfRound = 1;
+                fastPlay.setOutlineThickness(0);
+                fastPlay.setOutlineColor(sf::Color::Black);
+                fastPlay.setOutlineThickness(0);
+            }
+
+
+            float Mx = sf::Mouse::getPosition().x;
+            float My = sf::Mouse::getPosition().y;
+
+            if ((IntRect(695, 310, 140, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            {
+                typyOfCheckers = 1;
+                type1.setOutlineThickness(3);
+                type1.setOutlineColor(sf::Color(237, 147, 0));
+
+                type2.setOutlineThickness(0);
+                type3.setOutlineThickness(0);
+                type4.setOutlineThickness(0);
+
+            }
+
+            if ((IntRect(895, 310, 180, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                typyOfCheckers = 2;
+                type2.setOutlineThickness(3);
+                type2.setOutlineColor(sf::Color(237, 147, 0));
+
+                type1.setOutlineThickness(0);
+                type3.setOutlineThickness(0);
+                type4.setOutlineThickness(0);
+            }
+
+            if ((IntRect(1140, 310, 220, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            {
+                typyOfCheckers = 3;
+                type3.setOutlineThickness(3);
+                type3.setOutlineColor(sf::Color(237, 147, 0));
+
+                type2.setOutlineThickness(0);
+                type1.setOutlineThickness(0);
+                type4.setOutlineThickness(0);
+            }
+
+            if ((IntRect(1410, 310, 310, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                typyOfCheckers = 4;
+                type4.setOutlineThickness(3);
+                type4.setOutlineColor(sf::Color(237, 147, 0));
+
+                type2.setOutlineThickness(0);
+                type3.setOutlineThickness(0);
+                type1.setOutlineThickness(0);
+            }
+
+
+            if ((IntRect(695, 425, 150, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            {
+                color = 1;
+                whiteColor.setOutlineThickness(3);
+                whiteColor.setOutlineColor(sf::Color(237, 147, 0));
+
+                blackolor.setOutlineThickness(0);
+            }
+            if ((IntRect(895, 425, 150, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            {
+                color = 2;
+                blackolor.setOutlineThickness(3);
+                blackolor.setOutlineColor(sf::Color(237, 147, 0));
+
+                whiteColor.setOutlineThickness(0);
+            }
+
+
+            if ((IntRect(width - 405, height - 265, 170, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            { isButtonPressed = true; }
+
+            if ((IntRect(100, height - 265, 170, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            { Play.close(); }
+
+
+
+            enterCountRounds.handleEvent(event_play);
+
+
+            if(event_play.type==sf::Event::Closed) {
+                Play.close();
+            }
+
+            if (event_play.type == Event::KeyPressed)
+            {
+                //if (event_play.key.code == Keyboard::Escape) { Play.close(); }
+            }
+        }
+
+
+

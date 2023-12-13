@@ -810,66 +810,6 @@ int main()
             /////////////************///////////
 
 
-            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + hightScreen/7, 300, 90).contains(Mouse::getPosition(window)) &&
-                sf::Mouse::isButtonPressed(sf::Mouse::Left)) {  Options(hardlevel); }
-            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + 2 * (hightScreen/7), 300, 90).contains(Mouse::getPosition(window)) &&
-                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { About_Game(); }
-            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + 3 * (hightScreen/7), 300, 90).contains(Mouse::getPosition(window)) &&
-                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { window.close(); }
-            //if (event.key.code == Keyboard::Escape) { window.close(); }
-        }
-
-
-
-        /*
-        Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == Event::KeyReleased)
-            {
-                // События выбра пунктов меню
-                // нажати на клавиатуре стрелки вверх
-                if (event.key.code == Keyboard::Up) { mymenu.MoveUp(); }
-                // нажати на клавиатуре стрелки вниз
-                if (event.key.code == Keyboard::Down) { mymenu.MoveDown(); }
-                // нажати на клавиатуре клавиши Enter
-                if (event.key.code == Keyboard::Return)
-                {
-                    // Переходим на выбранный пункт меню
-                    switch (mymenu.getSelectedMenuNumber())
-                    {
-                        case 0:GamеStart();   break;
-                        case 1:Options();     break;
-                        case 2:About_Game();  break;
-                        case 3:window.close(); break;
-
-                    }
-
-                }
-            }
-        }*/
-
-        window.clear();
-        window.draw(background);
-        window.draw(Titul);
-        mymenu.draw();
-        window.display();
-    }
-
-    return 0;
-}
-
-// функция настройки текста
-void InitText(Text& mtext, float xpos, float ypos, String str, int size_font,
-              Color menu_text_color, int bord, Color border_color)
-{
-    mtext.setCharacterSize(size_font);
-    mtext.setPosition(xpos, ypos);
-    mtext.setString(str);
-    mtext.setFillColor(menu_text_color);
-    mtext.setOutlineThickness(bord);
-    mtext.setOutlineColor(border_color);
-}
 
 
 

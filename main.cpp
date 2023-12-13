@@ -390,3 +390,198 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
 
 
 
+
+
+
+// Функция настройки игры
+int Options(int &hardlevel)
+{
+    RenderWindow Options(VideoMode::getDesktopMode(), L"Настройки");
+
+    RectangleShape background_opt(Vector2f(1920, 1080));
+
+    Font font;
+    if (!font.loadFromFile("font/troika.otf")) return -1;
+
+    Texture texture_opt;
+    if (!texture_opt.loadFromFile("images/1111.jpg")) exit(1);
+    background_opt.setTexture(&texture_opt);
+
+
+
+    bool isPres = false;
+
+    //////////////***********************Сложность
+    sf::Text hardly;
+    hardly.setFont(font);
+    hardly.setString(L"Выберите уровень сложности:");
+    hardly.setCharacterSize(40);
+    hardly.setFillColor(sf::Color(237, 147, 0));
+    hardly.setOutlineThickness(3);
+    hardly.setOutlineColor(sf::Color::Black);
+    hardly.setPosition(100, 100);
+
+
+    sf::Text easy;
+    easy.setFont(font);
+    easy.setString(L"лёгкий");
+    easy.setCharacterSize(36);
+    easy.setFillColor(sf::Color::Black);
+    easy.setPosition(800, 100);
+
+    sf::Text medium;
+    medium.setFont(font);
+    medium.setString(L"средний");
+    medium.setCharacterSize(36);
+    medium.setFillColor(sf::Color::Black);
+    medium.setPosition(1000, 100);
+
+    sf::Text hard;
+    hard.setFont(font);
+    hard.setString(L"тяжёлый");
+    hard.setCharacterSize(36);
+    hard.setFillColor(sf::Color::Black);
+    hard.setPosition(1200, 100);
+
+    if (hardlevel == 1) {
+        easy.setOutlineThickness(3);
+        easy.setOutlineColor(sf::Color(237, 147, 0));
+    }
+    if (hardlevel == 2) {
+        medium.setOutlineThickness(3);
+        medium.setOutlineColor(sf::Color(237, 147, 0));
+    }
+    if (hardlevel == 3) {
+        hard.setOutlineThickness(3);
+        hard.setOutlineColor(sf::Color(237, 147, 0));
+    }
+
+
+    /////////////////////////////////////*******************************************************
+    //box
+    sdx::TextBox::Text f1("",534,320);
+    f1.setSize(34);
+    sdx::TextBox firstname;
+    firstname.setPosition(700, 200);
+    firstname.setSize(100,40);
+    firstname.setBorder(1);
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////*******
+
+
+    ////////////***********************************************  save
+    sf::Text save;
+    save.setFont(font);
+    save.setString(L"Сохранить");
+    save.setCharacterSize(48);
+    float width = VideoMode::getDesktopMode().width;
+    float height = VideoMode::getDesktopMode().height;
+    save.setFillColor(sf::Color(237, 147, 0));
+    save.setOutlineThickness(4);
+    save.setOutlineColor(sf::Color::Black);
+
+    save.setPosition(width - 400, height - 260);
+
+
+
+
+    while (Options.isOpen())
+    {
+        Event event_opt;
+        while (Options.pollEvent(event_opt))
+        {
+
+            if ((IntRect(795, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            {
+                hardlevel = 1;
+                easy.setOutlineThickness(3);
+                easy.setOutlineColor(sf::Color(237, 147, 0));
+
+                medium.setOutlineThickness(0);
+                hard.setOutlineThickness(0);
+            }
+
+            if ((IntRect(995, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            {
+                hardlevel = 2;
+                medium.setOutlineThickness(3);
+                medium.setOutlineColor(sf::Color(237, 147, 0));
+
+                easy.setOutlineThickness(0);
+                hard.setOutlineThickness(0);
+            }
+
+            if ((IntRect(1195, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            {
+                hardlevel = 3;
+                hard.setOutlineThickness(3);
+                hard.setOutlineColor(sf::Color(237, 147, 0));
+
+                medium.setOutlineThickness(0);
+                easy.setOutlineThickness(0);
+            }
+
+            if ((IntRect(width - 405, height - 265, 170, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            { isPres = true;}
+
+
+            if (event_opt.type == Event::Closed) Options.close();
+            if (event_opt.type == Event::KeyPressed)
+
+
+             {
+                //if (event_opt.key.code == Keyboard::Escape) Options.close();
+            }
+        }
+        Options.clear();
+        Options.draw(background_opt);
+        Options.draw(hardly);
+        Options.draw(easy);
+        Options.draw(medium);
+        Options.draw(hard);
+        Options.draw(save);
+        //Options.display();
+
+        firstname.draw(Options);
+        Options.draw(f1.get());
+
+        Options.display();
+
+        if (isPres == true )
+        {
+            Options.close();
+            return hardlevel;
+        }
+    }
+
+
+    /*
+     *
+     *     sdx::TextBox::Text f1("",534,320);
+    f1.setSize(34);
+    sdx::TextBox firstname;
+    firstname.setPosition(700, 200);
+    firstname.setSize(100,40);
+    firstname.setBorder(1);
+     *
+     * sdx::TextBox::Text rounds("",534,320);
+    rounds.setSize(34);
+    sdx::TextBox enterCountRounds;
+    enterCountRounds.setPosition(700, 200);
+    enterCountRounds.setSize(100,40);
+    enterCountRounds.setBorder(1);
+
+            //box
+        enterCountRounds.draw(Play);
+        Play.draw(rounds.get());
+
+     numberOfRound = enterCountRounds.getCurrentText();
+     */
+
+    std::string  firstNamePlayer = firstname.getCurrentText();
+
+    return hardlevel;
+}
+

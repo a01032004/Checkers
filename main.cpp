@@ -690,3 +690,199 @@ struct Piece {
     PieceColor color;
 };
 
+
+
+
+
+int main()
+{
+
+    // Создаём окно windows
+    RenderWindow window;
+    // Параметры: размер окна установить согласно текущему разрешению экрана
+    // название моя игра, развернуть графическое окно на весь размер экрана
+    window.create(sf::VideoMode::getDesktopMode(), L"Шашки", Style::Fullscreen);
+
+
+    // получаем текущий размер экрана
+    float width = VideoMode::getDesktopMode().width;
+    float height = VideoMode::getDesktopMode().height;
+
+    //
+    bool isStart = false;
+    int CountUsers = 0;
+    std::string  numberOfRound = "";
+    int  typyOfCheckers = 0;
+    int  color = 0;
+    int complexity = 0;
+    int hardlevel = 1;
+
+    int widthScreen = sf::VideoMode::getDesktopMode().width;
+    int hightScreen = sf::VideoMode::getDesktopMode().height;
+
+    // Устанавливаем фон для графического окна
+    // Создаём прямоугольник
+    RectangleShape background(Vector2f(widthScreen, hightScreen));
+    // Загружаем в прямоугольник текстуру с изображением 1111.jpg
+    Texture texture_window;
+    if (!texture_window.loadFromFile("images/1111.jpg")) return 4;
+    background.setTexture(&texture_window);
+
+    // Устанавливаем шрифт для названия игры
+    Font font;
+    if (!font.loadFromFile("font/troika.otf")) return 5;
+    Text Titul;
+    Titul.setFont(font);
+    // Текст с названием игры
+    InitText(Titul, widthScreen / 2 - 244, 50, L"Шашки", 150, Color(237, 147, 0), 3);
+
+    // Название пунктов меню
+    String name_menu[]{ L"Старт",L"Настройки", L"О игре",L"Выход"};
+
+    // Объект игровое меню
+    game::GameMenu mymenu(window, widthScreen / 2, hightScreen / 3, 4, name_menu, 100, 120);
+
+    // Установка цвета элементов пунктов меню
+    mymenu.setColorTextMenu(Color(237, 147, 0), Color::Red, Color::Black);
+    // выравнивание по центру пунктов меню
+    mymenu.AlignMenu(2);
+
+
+
+
+    while (window.isOpen())
+    {
+        Event event;
+        while (window.pollEvent(event)) {
+
+            if (event.type == Event::Closed) window.close();
+            if (event.type == Event::KeyPressed)
+            {
+                //if (event.key.code == Keyboard::Escape) window.close();
+            }
+
+
+            if (IntRect(widthScreen / 2 - 110, hightScreen / 3, 300, 90).contains(Mouse::getPosition(window)) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                isStart = GamеStart(CountUsers, numberOfRound, typyOfCheckers, color);
+                //GamеStart(CountUsers, numberOfRound, typyOfCheckers, color);
+                std::cout << typyOfCheckers;
+
+                /*
+                if (typyOfCheckers == 1 && isStart == true) {
+                    playRussianheckers();
+
+                    isStart = false;
+                }
+                 if (typyOfCheckers == 2 && isStart == true) {
+                    playPoddavkiCheckers();
+
+                    isStart = false;
+                }
+                 if (typyOfCheckers == 4 && isStart == true) {
+                    playWorldCheckers();
+
+                    isStart = false;
+                }
+
+                 */
+
+                int temp = 0;
+                if (typyOfCheckers == 3 && isStart == true) {
+                    temp = playEnglishCheckers(CountUsers, numberOfRound, color);
+
+                    isStart = false;
+                }
+
+                if (temp == 44) {
+                    temp = 0 ;
+                    temp = playEnglishCheckers(CountUsers, numberOfRound, color);
+
+                    isStart = false;
+                }
+
+            }
+
+
+
+
+
+            /////////////************///////////
+
+
+            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + hightScreen/7, 300, 90).contains(Mouse::getPosition(window)) &&
+                sf::Mouse::isButtonPressed(sf::Mouse::Left)) {  Options(hardlevel); }
+            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + 2 * (hightScreen/7), 300, 90).contains(Mouse::getPosition(window)) &&
+                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { About_Game(); }
+            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + 3 * (hightScreen/7), 300, 90).contains(Mouse::getPosition(window)) &&
+                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { window.close(); }
+            //if (event.key.code == Keyboard::Escape) { window.close(); }
+        }
+
+
+
+        /*
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::KeyReleased)
+            {
+                // События выбра пунктов меню
+                // нажати на клавиатуре стрелки вверх
+                if (event.key.code == Keyboard::Up) { mymenu.MoveUp(); }
+                // нажати на клавиатуре стрелки вниз
+                if (event.key.code == Keyboard::Down) { mymenu.MoveDown(); }
+                // нажати на клавиатуре клавиши Enter
+                if (event.key.code == Keyboard::Return)
+                {
+                    // Переходим на выбранный пункт меню
+                    switch (mymenu.getSelectedMenuNumber())
+                    {
+                        case 0:GamеStart();   break;
+                        case 1:Options();     break;
+                        case 2:About_Game();  break;
+                        case 3:window.close(); break;
+
+                    }
+
+                }
+            }
+        }*/
+
+        window.clear();
+        window.draw(background);
+        window.draw(Titul);
+        mymenu.draw();
+        window.display();
+    }
+
+    return 0;
+}
+
+// функция настройки текста
+void InitText(Text& mtext, float xpos, float ypos, String str, int size_font,
+              Color menu_text_color, int bord, Color border_color)
+{
+    mtext.setCharacterSize(size_font);
+    mtext.setPosition(xpos, ypos);
+    mtext.setString(str);
+    mtext.setFillColor(menu_text_color);
+    mtext.setOutlineThickness(bord);
+    mtext.setOutlineColor(border_color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

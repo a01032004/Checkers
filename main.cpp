@@ -585,3 +585,108 @@ int Options(int &hardlevel)
     return hardlevel;
 }
 
+// Функция с описанием игры
+int About_Game()
+{
+    RenderWindow About(VideoMode::getDesktopMode(), L"О игре");
+    RectangleShape background_ab(Vector2f(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height));
+
+    Font font;
+    if (!font.loadFromFile("font/troika.otf")) return -1;
+
+    Texture texture_ab;
+    if (!texture_ab.loadFromFile("images/1111.jpg")) exit(1);
+    background_ab.setTexture(&texture_ab);
+
+
+    ///////////*****************************************back
+    sf::Text goBack;
+    goBack.setFont(font);
+    goBack.setString(L"Назад");
+    goBack.setCharacterSize(48);
+    goBack.setFillColor(sf::Color(237, 147, 0));
+    goBack.setOutlineThickness(4);
+    goBack.setOutlineColor(sf::Color::Black);
+    float width = VideoMode::getDesktopMode().width;
+    float height = VideoMode::getDesktopMode().height;
+
+    goBack.setPosition(100, height - 260);
+
+
+    ///////////////******************************************** description
+    sf::Text read;
+    read.setFont(font);
+    read.setString(L"Игра: шашки");
+    read.setCharacterSize(40);
+    read.setFillColor(sf::Color(237, 147, 0));
+    read.setOutlineThickness(2);
+    read.setOutlineColor(sf::Color::Black);
+    read.setPosition(width / 2 - 150, 100);
+
+    ///////////////******************************************** description
+    sf::Text read2;
+    read2.setFont(font);
+    read2.setString(L"Правила игры всем известны:)      Цель - съесть все фигуры противника");
+    read2.setCharacterSize(40);
+    read2.setFillColor(sf::Color(237, 147, 0));
+    read2.setOutlineThickness(2);
+    read2.setOutlineColor(sf::Color::Black);
+    read2.setPosition(100, 250);
+
+    ///////////////******************************************** description
+    sf::Text read3;
+    read3.setFont(font);
+    read3.setString(L"Работу выполнили слушатели гр. 7322 Бархаткин, Павлов, Тихомиров");
+    read3.setCharacterSize(40);
+    read3.setFillColor(sf::Color(237, 147, 0));
+    read3.setOutlineThickness(2);
+    read3.setOutlineColor(sf::Color::Black);
+    read3.setPosition(100, 400);
+
+
+    while (About.isOpen())
+    {
+        Event event_play;
+        while (About.pollEvent(event_play))
+        {
+            if ((IntRect(100, height - 265, 170, 60).contains(Mouse::getPosition(About))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
+            { About.close(); }
+
+
+            if (event_play.type == Event::Closed) About.close();
+            if (event_play.type == Event::KeyPressed)
+            {
+                //if (event_play.key.code == Keyboard::Escape) About.close();
+            }
+        }
+        About.clear();
+        About.draw(background_ab);
+        About.draw(goBack);
+        About.draw(read);
+        About.draw(read2);
+        About.draw(read3);
+        About.display();
+    }
+}
+
+
+
+
+
+
+
+const int BOARD_SIZE = 8;
+const int TILE_SIZE = 80;
+
+
+#define BOARD_SIZE 8
+#define SQUARE_SIZE 80
+
+enum class PieceType { Pawn, King };
+enum class PieceColor { White, Black };
+
+struct Piece {
+    PieceType type;
+    PieceColor color;
+};
+

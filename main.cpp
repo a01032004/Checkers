@@ -342,3 +342,51 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
 
 
 
+        Play.clear();
+        Play.draw(background_play);
+        Play.draw(countUser1);
+        Play.draw(countUser2);
+        Play.draw(CountOfUsers);
+        Play.draw(CountORounds);
+        Play.draw(typeOfPlay);
+        Play.draw(orChoose);
+        Play.draw(fastPlay);
+
+        Play.draw(type1);
+        Play.draw(type2);
+        Play.draw(type3);
+        Play.draw(type4);
+        Play.draw(typeColor);
+        Play.draw(whiteColor);
+        Play.draw(blackolor);
+        Play.draw(startPlay);
+        Play.draw(goBack);
+
+        //box
+        enterCountRounds.draw(Play);
+        Play.draw(rounds.get());
+
+
+
+        Play.display();
+
+        if (isButtonPressed == true) {Play.close();}
+    }
+
+
+    numberOfRound = enterCountRounds.getCurrentText();
+
+    if (numberOfRound == "") {numberOfRound = "1";}
+    std::cout << CountUsers;
+    std::cout << numberOfRound;
+    std::cout << typyOfCheckers;
+    std::cout << color;
+    std::cout << isButtonPressed;
+
+    return (isButtonPressed);
+
+}
+
+
+
+

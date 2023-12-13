@@ -155,3 +155,60 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
 
     /////**********************color
 
+    sf::Text typeColor;
+    typeColor.setFont(font);
+    typeColor.setString(L"Выберите цвет шашек:");
+    typeColor.setCharacterSize(37);
+    typeColor.setFillColor(sf::Color(237, 147, 0));
+    typeColor.setOutlineThickness(3);
+    typeColor.setOutlineColor(sf::Color::Black);
+    typeColor.setPosition(100, 430);
+
+    color = 0; //1-white    2-black
+
+    sf::Text whiteColor;
+    whiteColor.setFont(font);
+    whiteColor.setString(L"Белый");
+    whiteColor.setCharacterSize(36);
+    whiteColor.setFillColor(sf::Color::Black);
+    whiteColor.setPosition(700, 430);
+
+    sf::Text blackolor;
+    blackolor.setFont(font);
+    blackolor.setString(L"Чёрный");
+    blackolor.setCharacterSize(36);
+    blackolor.setFillColor(sf::Color::Black);
+    blackolor.setPosition(900, 430);
+
+
+    //////************************startplay
+
+    bool isButtonPressed = false;
+    sf::Text startPlay;
+    startPlay.setFont(font);
+    startPlay.setString(L"Начать игру");
+    startPlay.setCharacterSize(48);
+    float width = VideoMode::getDesktopMode().width;
+    float height = VideoMode::getDesktopMode().height;
+    startPlay.setFillColor(sf::Color(237, 147, 0));
+    startPlay.setOutlineThickness(4);
+    startPlay.setOutlineColor(sf::Color::Black);
+
+    startPlay.setPosition(width - 400, height - 260);
+
+    ///////////*****************************************back
+    sf::Text goBack;
+    goBack.setFont(font);
+    goBack.setString(L"Назад");
+    goBack.setCharacterSize(48);
+    goBack.setFillColor(sf::Color(237, 147, 0));
+    goBack.setOutlineThickness(4);
+    goBack.setOutlineColor(sf::Color::Black);
+
+    goBack.setPosition(100, height - 260);
+
+
+
+
+
+

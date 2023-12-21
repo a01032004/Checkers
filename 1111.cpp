@@ -122,8 +122,10 @@ public:
 		{
 			if (_y + 2 < size && _x + 2 * direction >= 0 && _x + 2 * direction < size && board[_x + direction][_y + 1] != nullptr && (board[_x + direction][_y + 1]->GetColor() != GetColor()) && board[_x + 2 * direction][_y + 2] == nullptr)
 				coordsMoves.push_back(new int[2] { _x + 2 * direction, _y + 2 });
+
 			if (_y - 2 >= 0 && _x + 2 * direction >= 0 && _x + 2 * direction < size && board[_x + direction][_y - 1] != nullptr && (board[_x + direction][_y - 1]->GetColor() != GetColor()) && board[_x + 2 * direction][_y - 2] == nullptr)
 				coordsMoves.push_back(new int[2] { _x + 2 * direction, _y - 2 });
 		}
+
 		return coordsMoves;
 	}

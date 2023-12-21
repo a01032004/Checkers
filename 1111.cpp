@@ -142,3 +142,33 @@ int RussianShushuki(int& CountUsers, std::string& numberOfRound, int& color, std
                         return idk ? 2222 : 1111;
                     }
                 }
+
+
+                sf::Vector2i mousePos = sf::Mouse::getPosition(windowGame);
+                sf::Vector2i boardPos = (mousePos / TILE_SIZE);
+                int* pos = new int[2] {((mousePos.y - 200) / TILE_SIZE), ((mousePos.x - 600) / TILE_SIZE) };
+                // Проверка на наличие атаки
+                bool hasAttack = false;
+                for (int i = 0; i < BOARD_SIZE; i++)
+                    for (int j = 0; j < BOARD_SIZE; j++)
+                        if (board1[i][j] != nullptr && board1[i][j]->GetColor() == turn && ((board1[i][j]->GetAttackMoves(board1, 8, !turn).size() != 0) || ((board1[i][j]->GetAttackMoves(board1, 8, turn).size() != 0) || ((board1[i][j]->GetAttackMoves(board1, 8, !turn, true)).size() != 0))))
+                            hasAttack = true;
+                if (isPieceSelected && (inArray(moves, pos) || inArray(attackMoves, pos)) && pos[0] >= 0 && pos[1] >= 0 && pos[0] < 8 && pos[1] < 8 && board1[pos[0]][pos[1]] == nullptr || (CountUsers == 1 && turn == idk))
+                {
+
+                    if (CountUsers == 1 && turn == idk)
+                    {
+                        pos = goPos;
+                    }
+
+                    bool isAttack = inArray(attackMoves, pos); // передвижение / взятие
+                    board1[selectedPos[0]][selectedPos[1]]->moveTo(board1, pos[0], pos[1], isAttack, 8);
+                    hasAttack = false;
+                    if (turn && pos[0] == 0)
+                    {
+                        board1[pos[0]][pos[1]]->SetQueen();
+                    }
+                    else if (!turn && pos[0] == 7)
+                    {
+                        board1[pos[0]][pos[1]]->SetQueen();
+                    }

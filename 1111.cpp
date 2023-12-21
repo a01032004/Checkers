@@ -34,3 +34,34 @@ int RussianShushuki(int& CountUsers, std::string& numberOfRound, int& color, std
     }
     /*board1[7][0] = &W1; board1[7][2] = &W2; board1[7][4] = &W3; board1[7][6] = &W4; board1[6][1] = &W5; board1[6][3] = &W6; board1[6][5] = &W7;*/ board1[6][7] = &W8;  board1[5][0] = &W9; board1[5][2] = &W10; board1[5][4] = &W11; board1[5][6] = &W12;
     board1[0][1] = &B1; board1[0][3] = &B2; board1[0][5] = &B3; board1[0][7] = &B4; board1[1][0] = &B5; board1[1][2] = &B6; board1[1][4] = &B7; board1[1][6] = &B8; board1[2][1] = &B9; board1[2][3] = &B10; board1[2][5] = &B11; board1[2][7] = &B12;
+
+    sf::RenderWindow windowGame(sf::VideoMode::getDesktopMode(), "Russian Checkers Game");
+    RectangleShape background_ab(Vector2f(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height));
+
+    Texture texture_ab;
+    if (!texture_ab.loadFromFile("images/1111.jpg")) exit(1);
+    background_ab.setTexture(&texture_ab);
+
+    Font font;
+    if (!font.loadFromFile("font/troika.otf")) return -1;
+
+    sf::RectangleShape board[BOARD_SIZE][BOARD_SIZE];
+    sf::CircleShape pieces[BOARD_SIZE][BOARD_SIZE];
+
+    bool isPieceSelected = false;
+    sf::Vector2i selectedPiecePos;
+
+
+    for (int i = 0; i < BOARD_SIZE; i++)
+    {
+        for (int j = 0; j < BOARD_SIZE; j++)
+        {
+            board[i][j].setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+
+            if ((i + j) % 2 == 0)
+                board[i][j].setFillColor(sf::Color::White);
+            else
+                board[i][j].setFillColor(sf::Color::Red);
+            board[i][j].setPosition(i * TILE_SIZE + 600, j * TILE_SIZE + 200);                                          /////////////////////*********/////////
+        }
+    }

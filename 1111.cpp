@@ -34,3 +34,28 @@ private:
 	bool _isWhite;
 public:
 	Checker(int x, int y, bool isWhite, bool isQueen = 0) { _x = x; _y = y; _isWhite = isWhite; _isQueen = isQueen; };
+
+	void moveTo(Checker*** board, int x, int y, bool isAttack, int size)
+	{
+		board[_x][_y] = nullptr;
+		board[x][y] = this;
+
+		/*if (isAttack)
+		{
+			board[x][y] = nullptr;
+			board[x + ((x - _x) / abs(x - _x))][y + ((y - _y) / abs(y - _y))] = this;
+		}*/
+		if (isAttack)
+		{
+			for (int i = 1; i < size; ++i)
+			{
+				if (board[x - i * ((x - _x) / abs(x - _x))][y - i * ((y - _y) / abs(y - _y))] != nullptr)
+				{
+					board[x - i * ((x - _x) / abs(x - _x))][y - i * ((y - _y) / abs(y - _y))] = nullptr;
+					break;
+				}
+			}
+		}
+		_x = x; _y = y;
+
+	};

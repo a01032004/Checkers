@@ -94,3 +94,16 @@ public:
 			}
 			else if (board[_x - i][_y + i] != nullptr && board[_x - i][_y + i]->GetColor() == board[_x][_y]->GetColor())
 				break;
+
+		for (int i = 1; _x - i >= 0 && _y - i >= 0; ++i)
+			if (board[_x - i][_y - i] != nullptr && board[_x - i][_y - i]->GetColor() != board[_x][_y]->GetColor())
+			{
+				for (int j = 1; _x - i - j >= 0 && _y - j - i >= 0 && board[_x - i - j][_y - j - i] == nullptr; ++j)
+					coordsMoves.push_back(new int[2] {_x - i - j, _y - j - i});
+				break;
+			}
+			else if (board[_x - i][_y - i] != nullptr && board[_x - i][_y - i]->GetColor() == board[_x][_y]->GetColor())
+				break;
+
+		return coordsMoves;
+	}

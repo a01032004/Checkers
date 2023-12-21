@@ -1,0 +1,19 @@
+guest1 VS guest2    with score:   0:1
+guest1 VS guest2    with score:   0:2
+qwer VS sdf    with score:   0:2
+guest1 VS guest2    with score:   0:1
+guest1 VS guest2    with score:   0:1
+guest1 VS Bot4    with score:   0:1
+guest1 VS guest2    with score:   0:0
+err VS rtrt    with score:   0:1
+
+guest1 VS guest2    with score:   0:1
+guest1 VS guest2    with score:   0:1
+guest1 VS guest2    with score:   0:1
+guest1 VS guest2    with score:   0:1
+guest1 VS guest2    with score:   0:1
+guest1 VS Bot4    with score:   0:1
+guest1 VS Bot4    with score:   0:1
+guest1 VS Bot4    with score:   0:1
+guest1 VS guest2    with score:   0:0
+guest1 VS Bot4    with score:   0:0

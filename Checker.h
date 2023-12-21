@@ -4,10 +4,11 @@
 #include <iostream>
 #include <math.h>
 #include <SFML/Graphics.hpp>
-#include "TaskApi.h"
+//#include "TaskApi.h"
 
 using namespace std;
-TASK_API vector<int*> VectorSum(vector<int*> vector1, vector<int*> vector2);
+//TASK_API vector<int*> VectorSum(vector<int*> vector1, vector<int*> vector2);
+vector<int*> VectorSum(vector<int*> vector1, vector<int*> vector2);
 vector<int*> VectorSum(vector<int*> vector1, vector<int*> vector2)
 {
 	int size = vector1.size();
@@ -25,11 +26,11 @@ bool inArray(vector<int*> arr, int* element)
 	return false;
 }
 
-TASK_API class Checker
+ class Checker
 {
 private:
-	int _x; // Вертикальная координата              (да, я 47%)
-	int _y; // Горизонтальная координата			(да, я 53%)
+	int _x; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ              (пїЅпїЅ, пїЅ 47%)
+	int _y; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ			(пїЅпїЅ, пїЅ 53%)
 	bool _isQueen;
 	bool _isWhite;
 public:
@@ -118,7 +119,7 @@ public:
 			coordsMoves = RussianQueenAttackMoves(board, size);
 		}
 
-		else // эту часть использовать для русских шашек и английских дамок.
+		else // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 		{
 			if (_y + 2 < size && _x + 2 * direction >= 0 && _x + 2 * direction < size && board[_x + direction][_y + 1] != nullptr && (board[_x + direction][_y + 1]->GetColor() != GetColor()) && board[_x + 2 * direction][_y + 2] == nullptr)
 				coordsMoves.push_back(new int[2] { _x + 2 * direction, _y + 2 });
@@ -131,7 +132,7 @@ public:
 	{
 		int direction = __direction ? 1 : -1;
 		vector<int*> coordsMoves;
-		if (_isQueen && isRussian)  //вынести в отдельную функцию или добавить поле UPD можно укоротить раза в 2 с помощью дирекшона.
+		if (_isQueen && isRussian)  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ UPD пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ 2 пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 		{
 			for (int i = 1; _x + i < size && _y + i < size; ++i)
 			{

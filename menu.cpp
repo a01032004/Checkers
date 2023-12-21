@@ -218,7 +218,9 @@ namespace sdx {
 
     sf::String TextBox::getCurrentText() { return getPinp; }
 
- 
+    sf::String TextBox::getInput() { return txtInp; }
+
+    void TextBox::handleEvent(sf::Event & event)  {
         if(event.type==sf::Event::TextEntered && focus) {
             if((inpText.get().findCharacterPos(focusChar).x+1.2*textSize)<(width+posX) &&31<int(event.text.unicode) && 256>int(event.text.unicode)) {
                 if(focusChar==getPinp.getSize()) getPinp+=event.text.unicode;
@@ -266,7 +268,8 @@ namespace sdx {
         }
     }
 
-
+    void TextBox::draw(sf::RenderWindow & window) {
+        time+=clock.restart();
         if(focus){
             if(time.asSeconds()>1) {time=sf::Time::Zero;
                 blinker.setFillColor(sf::Color::Black);
@@ -285,4 +288,6 @@ namespace sdx {
         window.draw(blinker);
         window.draw(inpText.get());
     }
+
 }
+

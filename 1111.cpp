@@ -105,3 +105,40 @@ int RussianShushuki(int& CountUsers, std::string& numberOfRound, int& color, std
                         for (int j = 0; j < 8; j++)
                             if (board1[i][j] != nullptr && board1[i][j]->GetColor() == turn && (board1[i][j]->GetMoves(board1, 8, !turn, true).size() != 0))
                                 movers.push_back(new int[2] {i, j});
+
+                    if (int size = attackers.size() != 0)
+                    {
+                        ///рандом на атакеров;
+                        //выбор рандомного атакующего
+                        if (!repeatAttack)
+                        {
+                            selectedPos = attackers[rand() % size];
+                        }
+
+                        if (board1[selectedPos[0]][selectedPos[1]]->isQueen()) {
+                            // выбор рандомного хода данной шашки
+                            attackMoves = board1[selectedPos[0]][selectedPos[1]]->GetAttackMoves(board1, 8, turn, true);
+                            int attackArrSize = attackMoves.size();
+                            goPos = board1[selectedPos[0]][selectedPos[1]]->GetAttackMoves(board1, 8, turn, true)[rand() % attackArrSize];
+                        }
+                        else {
+                            // выбор рандомного хода данной шашки
+                            attackMoves = VectorSum(board1[selectedPos[0]][selectedPos[1]]->GetAttackMoves(board1, 8, !turn, true), board1[selectedPos[0]][selectedPos[1]]->GetAttackMoves(board1, 8, turn, true));
+                            int attackArrSize = attackMoves.size();
+                            goPos = VectorSum(board1[selectedPos[0]][selectedPos[1]]->GetAttackMoves(board1, 8, !turn, true), board1[selectedPos[0]][selectedPos[1]]->GetAttackMoves(board1, 8, turn, true))[rand() % attackArrSize];
+                        }
+
+                    }
+                    else if (int size = movers.size() != 0)
+                    {
+                        selectedPos = movers[rand() % size];
+                        moves = board1[selectedPos[0]][selectedPos[1]]->GetMoves(board1, 8, !turn, true);
+                        int movesArrSize = moves.size();
+                        goPos = moves[rand() % movesArrSize];
+                        // аналогично
+
+                    }
+                    else {/// нет ходов гы.
+                        return idk ? 2222 : 1111;
+                    }
+                }

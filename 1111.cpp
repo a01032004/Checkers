@@ -129,3 +129,18 @@ public:
 
 		return coordsMoves;
 	}
+
+	}
+	vector<int*> GetMoves(Checker*** board, int size, bool __direction, bool isRussian = false)
+	{
+		int direction = __direction ? 1 : -1;
+		vector<int*> coordsMoves;
+		if (_isQueen && isRussian)  //вынести в отдельную функцию или добавить поле UPD можно укоротить раза в 2 с помощью дирекшона.
+		{
+			for (int i = 1; _x + i < size && _y + i < size; ++i)
+			{
+				if (board[_x + i][_y + i] == nullptr)
+					coordsMoves.push_back(new int[2] {_x + i, _y + i});
+				else
+					break;
+			}

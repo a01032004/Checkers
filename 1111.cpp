@@ -184,3 +184,12 @@ public:
 		return coordsMoves;
 
 	}
+	bool isQueen() { return _isQueen; };
+	bool GetColor() { return _isWhite; };
+	int  GetX() { return _x; };
+	int  GetY() { return _y; };
+
+	void SetX(int x) { _x = x; };
+	void SetY(int y) { _y = y; };
+	void SetQueen() { _isQueen = true; };
+};

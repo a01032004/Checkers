@@ -10,7 +10,9 @@ void InitText(Text& mtext, float xpos, float ypos, String str, int size_font = 6
               Color menu_text_color = Color::White, int bord = 0, Color border_color = Color::Black);
 
 // Функция перехода к игре  bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, int color)
-bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, int color)
+
+bool GamеSta1rt(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers, int &color)
+
 {
     setlocale(LC_ALL, "Russian");
     RenderWindow Play(sf::VideoMode::getDesktopMode(), L"Начало игры");
@@ -91,8 +93,21 @@ bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, i
     enterCountRounds.setSize(100,40);
     enterCountRounds.setBorder(1);
 
-    //////************************************
 
+
+    sf::Text orChoose;
+    orChoose.setFont(font);
+    orChoose.setString(L"или");
+    orChoose.setCharacterSize(37);
+    orChoose.setFillColor(sf::Color::Black);
+    orChoose.setPosition(850, 200);
+
+    sf::Text fastPlay;
+    fastPlay.setFont(font);
+    fastPlay.setString(L"быстрая игра");
+    fastPlay.setCharacterSize(37);
+    fastPlay.setFillColor(sf::Color::Black);
+    fastPlay.setPosition(980, 200)
     sf::Text typeOfPlay;
     typeOfPlay.setFont(font);
     typeOfPlay.setString(L"Выберите вариант игры:");
@@ -221,8 +236,23 @@ bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, i
                     countUser1.setOutlineThickness(0);
                 }
 
-            float Mx = sf::Mouse::getPosition().x;
-            float My = sf::Mouse::getPosition().y;
+            if ((IntRect(970, 195, 200, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                numberOfRound = 1;
+                fastPlay.setOutlineThickness(3);
+                fastPlay.setOutlineColor(sf::Color(237, 147, 0));
+            }
+
+            if ((IntRect(690, 195, 100, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                numberOfRound = 1;
+                fastPlay.setOutlineThickness(0);
+                fastPlay.setOutlineColor(sf::Color::Black);
+                fastPlay.setOutlineThickness(0);
+            }
+
+
+
 
             if ((IntRect(695, 310, 140, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
             {
@@ -305,7 +335,7 @@ bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, i
 
             if (event_play.type == Event::KeyPressed)
             {
-                if (event_play.key.code == Keyboard::Escape) { Play.close(); }
+
             }
         }
 
@@ -317,7 +347,7 @@ bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, i
         Play.draw(countUser2);
         Play.draw(CountOfUsers);
         Play.draw(CountORounds);
-        Play.draw(typeOfPlay);
+
         Play.draw(type1);
         Play.draw(type2);
         Play.draw(type3);
@@ -339,6 +369,8 @@ bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, i
 
 
     numberOfRound = enterCountRounds.getCurrentText();
+
+    
     if (numberOfRound == "") {numberOfRound = "1";}
     std::cout << CountUsers;
     std::cout << numberOfRound;
@@ -357,7 +389,7 @@ bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, i
 
 
 // Функция настройки игры
-int Options()
+
 {
     RenderWindow Options(VideoMode::getDesktopMode(), L"Настройки");
 
@@ -371,7 +403,7 @@ int Options()
     background_opt.setTexture(&texture_opt);
 
 
-    int hardLevel = 1;
+
     bool isPres = false;
 
     //////////////***********************Сложность
@@ -406,42 +438,6 @@ int Options()
     hard.setFillColor(sf::Color::Black);
     hard.setPosition(1200, 100);
 
-
-    ////////////***********************************************  save
-    sf::Text save;
-    save.setFont(font);
-    save.setString(L"Сохранить");
-    save.setCharacterSize(48);
-    float width = VideoMode::getDesktopMode().width;
-    float height = VideoMode::getDesktopMode().height;
-    save.setFillColor(sf::Color(237, 147, 0));
-    save.setOutlineThickness(4);
-    save.setOutlineColor(sf::Color::Black);
-
-    save.setPosition(width - 400, height - 260);
-
-
-
-
-    while (Options.isOpen())
-    {
-        Event event_opt;
-        while (Options.pollEvent(event_opt))
-        {
-
-            if ((IntRect(795, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
-            {
-                hardLevel = 1;
-                easy.setOutlineThickness(3);
-                easy.setOutlineColor(sf::Color(237, 147, 0));
-
-                medium.setOutlineThickness(0);
-                hard.setOutlineThickness(0);
-            }
-
-            if ((IntRect(995, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
-            {
-                hardLevel = 2;
                 medium.setOutlineThickness(3);
                 medium.setOutlineColor(sf::Color(237, 147, 0));
 
@@ -450,9 +446,7 @@ int Options()
             }
 
             if ((IntRect(1195, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
-            {
-                hardLevel = 3;
-                hard.setOutlineThickness(3);
+     utlineThickness(3);
                 hard.setOutlineColor(sf::Color(237, 147, 0));
 
                 medium.setOutlineThickness(0);
@@ -463,11 +457,7 @@ int Options()
             { isPres = true;}
 
 
-            if (event_opt.type == Event::Closed) Options.close();
-            if (event_opt.type == Event::KeyPressed)
-            {
-                if (event_opt.key.code == Keyboard::Escape) Options.close();
-            }
+        
         }
         Options.clear();
         Options.draw(background_opt);
@@ -476,17 +466,12 @@ int Options()
         Options.draw(medium);
         Options.draw(hard);
         Options.draw(save);
+
         Options.display();
 
         if (isPres == true )
         {
-            Options.close();
-            return hardLevel;
-        }
-    }
-
-    return hardLevel;
-}
+     
 
 // Функция с описанием игры
 int About_Game()
@@ -559,7 +544,7 @@ int About_Game()
             if (event_play.type == Event::Closed) About.close();
             if (event_play.type == Event::KeyPressed)
             {
-                if (event_play.key.code == Keyboard::Escape) About.close();
+
             }
         }
         About.clear();
@@ -592,6 +577,8 @@ struct Piece {
     PieceType type;
     PieceColor color;
 };
+
+
 
 int playCheckers()
 {
@@ -1035,8 +1022,12 @@ int RussianShushuki()
 
 
 
-/*
-int main()
+
+
+
+
+
+ mlain()
 {
 
     // Создаём окно windows
@@ -1057,6 +1048,8 @@ int main()
     int  typyOfCheckers = 0;
     int  color = 0;
     int complexity = 0;
+
+
 
     int widthScreen = sf::VideoMode::getDesktopMode().width;
     int hightScreen = sf::VideoMode::getDesktopMode().height;
@@ -1098,6 +1091,7 @@ int main()
 
 
 
+
             if (IntRect(widthScreen / 2 - 110, hightScreen / 3, 300, 90).contains(Mouse::getPosition(window)) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
             { isStart = GamеStart(CountUsers, numberOfRound, typyOfCheckers, color); }
                 //sf::Mouse::isButtonPressed(sf::Mouse::Left)) { isStart = GamеStart(CountUsers, numberOfRound, typyOfCheckers, color); }
@@ -1112,12 +1106,64 @@ int main()
 
             if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + hightScreen/7, 300, 90).contains(Mouse::getPosition(window)) &&
                 sf::Mouse::isButtonPressed(sf::Mouse::Left)) { complexity = Options(); }
-            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + 2 * (hightScreen/7), 300, 90).contains(Mouse::getPosition(window)) &&
-                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { About_Game(); }
-            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + 3 * (hightScreen/7), 300, 90).contains(Mouse::getPosition(window)) &&
-                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { window.close(); }
-            if (event.key.code == Keyboard::Escape) { window.close(); }
-        }
+
+            if (event.type == Event::Closed) window.close();
+            if (event.type == Event::KeyPressed)
+            {
+                //if (event.key.code == Keyboard::Escape) window.close();
+            }
+
+
+            if (IntRect(widthScreen / 2 - 110, hightScreen / 3, 300, 90).contains(Mouse::getPosition(window)) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                isStart = GamеStart(CountUsers, numberOfRound, typyOfCheckers, color);
+                //GamеStart(CountUsers, numberOfRound, typyOfCheckers, color);
+                std::cout << typyOfCheckers;
+
+                /*
+                if (typyOfCheckers == 1 && isStart == true) {
+                    playRussianheckers();
+
+                    isStart = false;
+                }
+                 if (typyOfCheckers == 2 && isStart == true) {
+                    playPoddavkiCheckers();
+
+                    isStart = false;
+                }
+                 if (typyOfCheckers == 4 && isStart == true) {
+                    playWorldCheckers();
+
+                    isStart = false;
+                }
+
+                 */
+
+                int temp = 0;
+                if (typyOfCheckers == 3 && isStart == true) {
+                    temp = playEnglishCheckers(CountUsers, numberOfRound, color);
+
+                    isStart = false;
+                }
+
+                if (temp == 44) {
+                    temp = 0 ;
+                    temp = playEnglishCheckers(CountUsers, numberOfRound, color);
+
+                    isStart = false;
+                }
+
+            }
+
+
+
+
+
+            /////////////************///////////
+
+
+            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + hightScreen/7, 300, 90).contains(Mouse::getPosition(window)) &&
+
 
 
 
@@ -1151,7 +1197,7 @@ int main()
 
         window.clear();
         window.draw(background);
-        window.draw(Titul);
+        window.draw(Titul);F
         mymenu.draw();
         window.display();
     }
@@ -1168,5 +1214,4 @@ void InitText(Text& mtext, float xpos, float ypos, String str, int size_font,
     mtext.setString(str);
     mtext.setFillColor(menu_text_color);
     mtext.setOutlineThickness(bord);
-    mtext.setOutlineColor(border_color);
-}
+    mtext.

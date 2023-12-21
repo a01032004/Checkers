@@ -221,3 +221,52 @@ int RussianShushuki(int& CountUsers, std::string& numberOfRound, int& color, std
                 }
             }
         }
+
+        //////////////////////////////////////////////////////////////////
+        bool isWhiteWon = true;
+        bool isBlackWon = true;
+        for (int i = 0; i < BOARD_SIZE; ++i)
+        {
+            for (int j = 0; j < BOARD_SIZE; ++j)
+            {
+                if (board1[i][j] != nullptr)
+                {
+                    if (board1[i][j]->GetColor() == true)
+                        isBlackWon = false;
+                    else
+                        isWhiteWon = false;
+                }
+            }
+        }
+        if (!isWhiteWon && !isBlackWon) {
+            continue;
+        }
+
+
+        int temp = 0;
+
+        if (isWhiteWon) {
+            wins1 = wins1 + 1;
+            numberOfRound = std::to_string(rounds - 1);
+            if (std::stoi(numberOfRound) > 0) {
+                return(11);
+            }
+            if (std::stoi(numberOfRound) == 0) {
+                return (111);
+            }
+            return 1111;
+        }
+
+        if (isBlackWon) {
+            wins2 = wins2 + 1;
+            numberOfRound = std::to_string(rounds - 1);
+            if (std::stoi(numberOfRound) == 0) {
+                return (222);
+            }
+            if (std::stoi(numberOfRound) > 0) {
+                return (22);
+            }
+
+            return 2222;
+        }
+        }

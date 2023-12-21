@@ -10,7 +10,9 @@ void InitText(Text& mtext, float xpos, float ypos, String str, int size_font = 6
               Color menu_text_color = Color::White, int bord = 0, Color border_color = Color::Black);
 
 // Функция перехода к игре  bool GamеStart(int CountUsers, std::string numberOfRound, int typyOfCheckers, int color)
-bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers, int &color)
+
+bool GamеSta1rt(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers, int &color)
+
 {
     setlocale(LC_ALL, "Russian");
     RenderWindow Play(sf::VideoMode::getDesktopMode(), L"Начало игры");
@@ -92,6 +94,7 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
     enterCountRounds.setBorder(1);
 
 
+
     sf::Text orChoose;
     orChoose.setFont(font);
     orChoose.setString(L"или");
@@ -104,10 +107,7 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
     fastPlay.setString(L"быстрая игра");
     fastPlay.setCharacterSize(37);
     fastPlay.setFillColor(sf::Color::Black);
-    fastPlay.setPosition(980, 200);
-
-    //////************************************
-
+    fastPlay.setPosition(980, 200)
     sf::Text typeOfPlay;
     typeOfPlay.setFont(font);
     typeOfPlay.setString(L"Выберите вариант игры:");
@@ -252,8 +252,7 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
             }
 
 
-            float Mx = sf::Mouse::getPosition().x;
-            float My = sf::Mouse::getPosition().y;
+
 
             if ((IntRect(695, 310, 140, 60).contains(Mouse::getPosition(Play))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
             {
@@ -336,7 +335,7 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
 
             if (event_play.type == Event::KeyPressed)
             {
-                //if (event_play.key.code == Keyboard::Escape) { Play.close(); }
+
             }
         }
 
@@ -348,9 +347,6 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
         Play.draw(countUser2);
         Play.draw(CountOfUsers);
         Play.draw(CountORounds);
-        Play.draw(typeOfPlay);
-        Play.draw(orChoose);
-        Play.draw(fastPlay);
 
         Play.draw(type1);
         Play.draw(type2);
@@ -366,8 +362,6 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
         enterCountRounds.draw(Play);
         Play.draw(rounds.get());
 
-
-
         Play.display();
 
         if (isButtonPressed == true) {Play.close();}
@@ -376,6 +370,7 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
 
     numberOfRound = enterCountRounds.getCurrentText();
 
+    
     if (numberOfRound == "") {numberOfRound = "1";}
     std::cout << CountUsers;
     std::cout << numberOfRound;
@@ -394,7 +389,7 @@ bool GamеStart(int &CountUsers, std::string &numberOfRound, int &typyOfCheckers
 
 
 // Функция настройки игры
-int Options(int &hardlevel)
+
 {
     RenderWindow Options(VideoMode::getDesktopMode(), L"Настройки");
 
@@ -443,69 +438,6 @@ int Options(int &hardlevel)
     hard.setFillColor(sf::Color::Black);
     hard.setPosition(1200, 100);
 
-    if (hardlevel == 1) {
-        easy.setOutlineThickness(3);
-        easy.setOutlineColor(sf::Color(237, 147, 0));
-    }
-    if (hardlevel == 2) {
-        medium.setOutlineThickness(3);
-        medium.setOutlineColor(sf::Color(237, 147, 0));
-    }
-    if (hardlevel == 3) {
-        hard.setOutlineThickness(3);
-        hard.setOutlineColor(sf::Color(237, 147, 0));
-    }
-
-
-    /////////////////////////////////////*******************************************************
-    //box
-    sdx::TextBox::Text f1("",534,320);
-    f1.setSize(34);
-    sdx::TextBox firstname;
-    firstname.setPosition(700, 200);
-    firstname.setSize(100,40);
-    firstname.setBorder(1);
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////*******
-
-
-    ////////////***********************************************  save
-    sf::Text save;
-    save.setFont(font);
-    save.setString(L"Сохранить");
-    save.setCharacterSize(48);
-    float width = VideoMode::getDesktopMode().width;
-    float height = VideoMode::getDesktopMode().height;
-    save.setFillColor(sf::Color(237, 147, 0));
-    save.setOutlineThickness(4);
-    save.setOutlineColor(sf::Color::Black);
-
-    save.setPosition(width - 400, height - 260);
-
-
-
-
-    while (Options.isOpen())
-    {
-        Event event_opt;
-        while (Options.pollEvent(event_opt))
-        {
-
-            if ((IntRect(795, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
-            {
-                hardlevel = 1;
-                easy.setOutlineThickness(3);
-                easy.setOutlineColor(sf::Color(237, 147, 0));
-
-                medium.setOutlineThickness(0);
-                hard.setOutlineThickness(0);
-            }
-
-            if ((IntRect(995, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
-            {
-                hardlevel = 2;
                 medium.setOutlineThickness(3);
                 medium.setOutlineColor(sf::Color(237, 147, 0));
 
@@ -514,9 +446,7 @@ int Options(int &hardlevel)
             }
 
             if ((IntRect(1195, 95, 150, 60).contains(Mouse::getPosition(Options))) && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
-            {
-                hardlevel = 3;
-                hard.setOutlineThickness(3);
+     utlineThickness(3);
                 hard.setOutlineColor(sf::Color(237, 147, 0));
 
                 medium.setOutlineThickness(0);
@@ -527,13 +457,7 @@ int Options(int &hardlevel)
             { isPres = true;}
 
 
-            if (event_opt.type == Event::Closed) Options.close();
-            if (event_opt.type == Event::KeyPressed)
-
-
-             {
-                //if (event_opt.key.code == Keyboard::Escape) Options.close();
-            }
+        
         }
         Options.clear();
         Options.draw(background_opt);
@@ -542,48 +466,12 @@ int Options(int &hardlevel)
         Options.draw(medium);
         Options.draw(hard);
         Options.draw(save);
-        //Options.display();
-
-        firstname.draw(Options);
-        Options.draw(f1.get());
 
         Options.display();
 
         if (isPres == true )
         {
-            Options.close();
-            return hardlevel;
-        }
-    }
-
-
-    /*
-     *
-     *     sdx::TextBox::Text f1("",534,320);
-    f1.setSize(34);
-    sdx::TextBox firstname;
-    firstname.setPosition(700, 200);
-    firstname.setSize(100,40);
-    firstname.setBorder(1);
-     *
-     * sdx::TextBox::Text rounds("",534,320);
-    rounds.setSize(34);
-    sdx::TextBox enterCountRounds;
-    enterCountRounds.setPosition(700, 200);
-    enterCountRounds.setSize(100,40);
-    enterCountRounds.setBorder(1);
-
-            //box
-        enterCountRounds.draw(Play);
-        Play.draw(rounds.get());
-
-     numberOfRound = enterCountRounds.getCurrentText();
-     */
-
-    std::string  firstNamePlayer = firstname.getCurrentText();
-
-    return hardlevel;
-}
+     
 
 // Функция с описанием игры
 int About_Game()
@@ -656,7 +544,7 @@ int About_Game()
             if (event_play.type == Event::Closed) About.close();
             if (event_play.type == Event::KeyPressed)
             {
-                //if (event_play.key.code == Keyboard::Escape) About.close();
+
             }
         }
         About.clear();
@@ -692,9 +580,454 @@ struct Piece {
 
 
 
+int playCheckers()
+{
+    	Checker W1 (7, 0, true);
+		Checker W2 (7, 2, true);
+		Checker W3 (7, 4, true);
+		Checker W4 (7, 6, true);
+		Checker W5 (6, 1, true);
+		Checker W6 (6, 3, true);
+		Checker W7 (6, 5, true);
+		Checker W8 (6, 7, true);
+		Checker W9 (5, 0, true);
+		Checker W10(5, 2, true);
+		Checker W11(5, 4, true);
+		Checker W12(5, 6, true);
+
+		Checker B1 (0, 1, false);
+		Checker B2 (0, 3, false);
+		Checker B3 (0, 5, false);
+		Checker B4 (0, 7, false);
+		Checker B5 (1, 0, false);
+		Checker B6 (1, 2, false);
+		Checker B7 (1, 4, false);
+		Checker B8 (1, 6, false);
+		Checker B9 (2, 1, false);
+		Checker B10(2, 3, false);
+		Checker B11(2, 5, false);
+		Checker B12(2, 7, false);
+        Checker*** board1 = new Checker * *[8];
+        for (int i = 0; i < 8; ++i)
+       	{
+       		board1[i] = new Checker* [8];
+       		for (int j = 0; j < 8; ++j)
+       			board1[i][j] = nullptr;
+       	}
+        board1[7][0] = &W1; board1[7][2] = &W2; board1[7][4] = &W3; board1[7][6] = &W4; board1[6][1] = &W5; board1[6][3] = &W6; board1[6][5] = &W7; board1[6][7] = &W8;  board1[5][0] = &W9; board1[5][2] = &W10; board1[5][4] = &W11; board1[5][6] = &W12;
+        board1[0][1] = &B1; board1[0][3] = &B2; board1[0][5] = &B3; board1[0][7] = &B4; board1[1][0] = &B5; board1[1][2] = &B6; board1[1][4] = &B7; board1[1][6] = &B8; board1[2][1] = &B9; board1[2][3] = &B10; board1[2][5] = &B11; board1[2][7] = &B12;
+
+    sf::RenderWindow window(sf::VideoMode(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE), "Checkers Game");
+
+    sf::RectangleShape board[BOARD_SIZE][BOARD_SIZE];
+    sf::CircleShape pieces[BOARD_SIZE][BOARD_SIZE];
+
+    bool isPieceSelected = false;
+    sf::Vector2i selectedPiecePos;
 
 
-int main()
+    for (int i = 0; i < BOARD_SIZE; i++) 
+    {
+        for (int j = 0; j < BOARD_SIZE; j++) 
+        {
+            board[i][j].setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+
+            if ((i + j) % 2 == 0)
+                board[i][j].setFillColor(sf::Color::White);
+            else
+                board[i][j].setFillColor(sf::Color::Magenta);
+            board[i][j].setPosition(i * TILE_SIZE, j * TILE_SIZE);
+        }
+    }
+    int* selectedPos = new int [2]{-1,-1};
+    vector<int*> moves;
+    vector<int*> attackMoves;
+    bool turn = true;
+    bool repeatAttack = false;
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            if (event.type == Event::KeyPressed)
+            {
+                if (event.key.code == Keyboard::Escape) window.close();
+            }
+
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    if (!repeatAttack)
+                    {
+                        for (int i = 0; i < BOARD_SIZE; i++) // в отдельную функцию.
+                        {
+                            for (int j = 0; j < BOARD_SIZE; j++)
+                            {
+                                if ((i + j) % 2 == 0)
+                                    board[i][j].setFillColor(sf::Color::White);
+                                else
+                                    board[i][j].setFillColor(sf::Color::Magenta);
+                            }
+                        }
+                    }
+                    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                    sf::Vector2i boardPos = (mousePos / TILE_SIZE);
+                    int* pos = new int[2] {(mousePos.y / TILE_SIZE), mousePos.x / TILE_SIZE};
+                    if (isPieceSelected && (inArray(moves, pos) || inArray(attackMoves, pos)))
+                    {
+
+
+                        // Move the selected piece to the new position
+                        /*pieces[boardPos.x][boardPos.y] = pieces[selectedPiecePos.x][selectedPiecePos.y];
+                        pieces[selectedPiecePos.x][selectedPiecePos.y].setFillColor(sf::Color::Transparent);*/
+
+                        bool isAttack = inArray(attackMoves, pos); // передвижение / взятие
+                        board1[selectedPos[0]][selectedPos[1]]->moveTo(board1, pos[0], pos[1], isAttack, 8);
+
+                        if (turn && pos[0] == 0)
+                        {
+                            board1[pos[0]][pos[1]]->SetQueen();
+                        }
+                        else if (!turn && pos[0] == 7)
+                        {
+                            board1[pos[0]][pos[1]]->SetQueen();
+                        }
+                        
+                        if (isAttack && (attackMoves = VectorSum(board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, !turn), board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, board1[pos[0]][pos[1]]->isQueen() ? turn : !turn))).size() != 0)
+                        {
+                            moves.clear();
+                            for (int i = 0; i < BOARD_SIZE; i++) // в отдельную функцию.
+                            {
+                                for (int j = 0; j < BOARD_SIZE; j++)
+                                {
+                                    if ((i + j) % 2 == 0)
+                                        board[i][j].setFillColor(sf::Color::White);
+                                    else
+                                        board[i][j].setFillColor(sf::Color::Magenta);
+                                }
+                            }
+                            selectedPos[0] = pos[0]; selectedPos[1] = pos[1];
+                            //sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                            //sf::Vector2i boardPos = (mousePos / TILE_SIZE);
+                            //int* pos = new int[2] {(mousePos.y / TILE_SIZE), mousePos.x / TILE_SIZE};
+                            for (int i = 0; i < attackMoves.size(); ++i)
+                                board[attackMoves[i][1]][attackMoves[i][0]].setFillColor(sf::Color::Red);
+                            board[pos[1]][pos[0]].setFillColor(sf::Color::Green); // Добавить кнопку отмены хода.
+                            /*if (inArray(attackMoves, pos))
+                                board1[selectedPos[0]][selectedPos[1]]->moveTo(board1, pos[0], pos[1], isAttack, 8);*/
+                            repeatAttack = true;
+                        }
+                        else
+                        {
+                            isPieceSelected = false; //конец хода.
+                            turn = !turn;
+                            repeatAttack = false;
+                            for (int i = 0; i < BOARD_SIZE; i++) // в отдельную функцию.
+                            {
+                                for (int j = 0; j < BOARD_SIZE; j++)
+                                {
+                                    if ((i + j) % 2 == 0)
+                                        board[i][j].setFillColor(sf::Color::White);
+                                    else
+                                        board[i][j].setFillColor(sf::Color::Magenta);
+                                }
+                            }
+                        }
+                    }
+                   
+                    else {
+                        // Select the piece on the clicked position
+                        //if (pieces[boardPos.x][boardPos.y].getFillColor() != sf::Color::Transparent)
+                        if ( board1[pos[0]][pos[1]] != nullptr && turn == board1[pos[0]][pos[1]]->GetColor() && !repeatAttack)
+                        {
+                            isPieceSelected = true;
+                            selectedPos = new int[2] {pos[0], pos[1]};
+                            moves = board1[pos[0]][pos[1]]->GetMoves(board1, 8, !turn);
+                            attackMoves = board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, !turn);
+                            if (board1[pos[0]][pos[1]]->isQueen())
+                            {
+                                moves = VectorSum(board1[pos[0]][pos[1]]->GetMoves(board1, 8, turn),moves);
+                                attackMoves = VectorSum(board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, turn), attackMoves);
+                            }
+                            board[pos[1]][pos[0]].setFillColor(sf::Color::Green);
+                            for (int i = 0; i < moves.size(); ++i)
+                                board[moves[i][1]][moves[i][0]].setFillColor(sf::Color::Blue);
+                            for (int i = 0; i < attackMoves.size(); ++i)
+                                board[attackMoves[i][1]][attackMoves[i][0]].setFillColor(sf::Color::Red);
+                        }
+                    }
+                }
+            }
+            //////////////////////////////////////////////////////////////////
+            bool isWhiteWon = true;
+            bool isBlackWon = true;
+            for (int i = 0; i < BOARD_SIZE; ++i)
+            {
+                for (int j = 0; j < BOARD_SIZE; ++j)
+                {
+                    if (board1[i][j] != nullptr)
+                    {
+                        if (board1[i][j]->GetColor() == true)
+                            isBlackWon = false;
+                        else
+                            isWhiteWon = false;
+                    }
+                }
+            }
+            if (!isWhiteWon && !isBlackWon)
+                continue;
+            if (isWhiteWon)
+                return 1;
+            if (isBlackWon)
+                return 2;
+        }
+
+        window.clear();
+       for (int i = 0; i < BOARD_SIZE; i++) 
+            for (int j = 0; j < BOARD_SIZE; j++) 
+                pieces[i][j].setFillColor(sf::Color::Transparent);
+
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (board1[j][i] != nullptr && board1[j][i]->GetColor() == true) { // otdelynaya function pzlst
+                    pieces[i][j].setRadius(TILE_SIZE / 2 - 10);
+                    pieces[i][j].setFillColor(sf::Color::White);
+                    pieces[i][j].setPosition(i * TILE_SIZE + 10, j * TILE_SIZE + 10);
+                }
+
+                if (board1[j][i] != nullptr && board1[j][i]->GetColor() == false) {
+                    pieces[i][j].setRadius(TILE_SIZE / 2 - 10);
+                    pieces[i][j].setFillColor(sf::Color::Black);
+                    pieces[i][j].setPosition(i * TILE_SIZE + 10, j * TILE_SIZE + 10);
+                }
+            }
+        }
+
+        for (int i = 0; i < BOARD_SIZE; i++) 
+        {
+            for (int j = 0; j < BOARD_SIZE; j++) 
+            {
+                window.draw(board[i][j]);
+
+                if (pieces[i][j].getFillColor() != sf::Color::Transparent) 
+                    window.draw(pieces[i][j]);
+            }
+        }
+    
+
+        window.display();
+    }
+
+    return 0;
+
+};
+
+
+// пока ничего не делал.
+int RussianShushuki()
+{
+    Checker W1(7, 0, true);
+    Checker W2(7, 2, true);
+    Checker W3(7, 4, true);
+    Checker W4(7, 6, true);
+    Checker W5(6, 1, true);
+    Checker W6(6, 3, true);
+    Checker W7(6, 5, true);
+    Checker W8(6, 7, true);
+    Checker W9(5, 0, true);
+    Checker W10(5, 2, true);
+    Checker W11(5, 4, true);
+    Checker W12(5, 6, true);
+
+    Checker B1(0, 1, false);
+    Checker B2(0, 3, false);
+    Checker B3(0, 5, false);
+    Checker B4(0, 7, false);
+    Checker B5(1, 0, false);
+    Checker B6(1, 2, false);
+    Checker B7(1, 4, false);
+    Checker B8(1, 6, false);
+    Checker B9(2, 1, false);
+    Checker B10(2, 3, false);
+    Checker B11(2, 5, false);
+    Checker B12(2, 7, false);
+    Checker*** board1 = new Checker * *[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        board1[i] = new Checker * [8];
+        for (int j = 0; j < 8; ++j)
+            board1[i][j] = nullptr;
+    }
+    board1[7][0] = &W1; board1[7][2] = &W2; board1[7][4] = &W3; board1[7][6] = &W4; board1[6][1] = &W5; board1[6][3] = &W6; board1[6][5] = &W7; board1[6][7] = &W8;  board1[5][0] = &W9; board1[5][2] = &W10; board1[5][4] = &W11; board1[5][6] = &W12;
+    board1[0][1] = &B1; board1[0][3] = &B2; board1[0][5] = &B3; board1[0][7] = &B4; board1[1][0] = &B5; board1[1][2] = &B6; board1[1][4] = &B7; board1[1][6] = &B8; board1[2][1] = &B9; board1[2][3] = &B10; board1[2][5] = &B11; board1[2][7] = &B12;
+
+    sf::RenderWindow window(sf::VideoMode(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE), "Checkers Game");
+
+    sf::RectangleShape board[BOARD_SIZE][BOARD_SIZE];
+    sf::CircleShape pieces[BOARD_SIZE][BOARD_SIZE];
+
+    bool isPieceSelected = false;
+    sf::Vector2i selectedPiecePos;
+
+
+    for (int i = 0; i < BOARD_SIZE; i++)
+    {
+        for (int j = 0; j < BOARD_SIZE; j++)
+        {
+            board[i][j].setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+
+            if ((i + j) % 2 == 0)
+                board[i][j].setFillColor(sf::Color::White);
+            else
+                board[i][j].setFillColor(sf::Color::Magenta);
+            board[i][j].setPosition(i * TILE_SIZE, j * TILE_SIZE);
+        }
+    }
+    int* selectedPos = new int [2] {-1, -1};
+    vector<int*> moves;
+    vector<int*> attackMoves;
+    bool turn = true;
+    bool repeatAttack = false;
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            if (event.type == Event::KeyPressed)
+            {
+                if (event.key.code == Keyboard::Escape) window.close();
+            }
+
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    if (!repeatAttack)
+                    {
+                        for (int i = 0; i < BOARD_SIZE; i++) // в отдельную функцию.
+                        {
+                            for (int j = 0; j < BOARD_SIZE; j++)
+                            {
+                                if ((i + j) % 2 == 0)
+                                    board[i][j].setFillColor(sf::Color::White);
+                                else
+                                    board[i][j].setFillColor(sf::Color::Magenta);
+                            }
+                        }
+                    }
+                    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                    sf::Vector2i boardPos = (mousePos / TILE_SIZE);
+                    int* pos = new int[2] {(mousePos.y / TILE_SIZE), mousePos.x / TILE_SIZE};
+                    if (isPieceSelected && (inArray(moves, pos) || inArray(attackMoves, pos)))
+                    {
+                        // Move the selected piece to the new position
+                        //pieces[boardPos.x][boardPos.y] = pieces[selectedPiecePos.x][selectedPiecePos.y];
+                        //pieces[selectedPiecePos.x][selectedPiecePos.y].setFillColor(sf::Color::Transparent);
+
+                        bool isAttack = inArray(attackMoves, pos); // передвижение / взятие
+                        board1[selectedPos[0]][selectedPos[1]]->moveTo(board1, pos[0], pos[1], isAttack, 8);
+
+                        if (turn && pos[0] == 0)
+                        {
+                            board1[pos[0]][pos[1]]->SetQueen();
+                        }
+                        else if (!turn && pos[0] == 7)
+                        {
+                            board1[pos[0]][pos[1]]->SetQueen();
+                        }
+
+                        if (isAttack && (attackMoves = VectorSum(board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, !turn), board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, board1[pos[0]][pos[1]]->isQueen() ? turn : !turn, true))).size() != 0)
+                        {
+                            moves.clear();
+                            for (int i = 0; i < BOARD_SIZE; i++) // в отдельную функцию.
+                            {
+                                for (int j = 0; j < BOARD_SIZE; j++)
+                                {
+                                    if ((i + j) % 2 == 0)
+                                        board[i][j].setFillColor(sf::Color::White);
+                                    else
+                                        board[i][j].setFillColor(sf::Color::Magenta);
+                                }
+                            }
+                            selectedPos[0] = pos[0]; selectedPos[1] = pos[1];
+                            //sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                            //sf::Vector2i boardPos = (mousePos / TILE_SIZE);
+                            //int* pos = new int[2] {(mousePos.y / TILE_SIZE), mousePos.x / TILE_SIZE};
+                            for (int i = 0; i < attackMoves.size(); ++i)
+                                board[attackMoves[i][1]][attackMoves[i][0]].setFillColor(sf::Color::Red);
+                            board[pos[1]][pos[0]].setFillColor(sf::Color::Green); // Добавить кнопку отмены хода.
+                            /*if (inArray(attackMoves, pos))
+                                board1[selectedPos[0]][selectedPos[1]]->moveTo(board1, pos[0], pos[1], isAttack, 8);
+                            repeatAttack = true;
+                        }
+                        else
+                        {
+                            isPieceSelected = false; //конец хода.
+                            turn = !turn;
+                            repeatAttack = false;
+                            for (int i = 0; i < BOARD_SIZE; i++) // в отдельную функцию.
+                            {
+                                for (int j = 0; j < BOARD_SIZE; j++)
+                                {
+                                    if ((i + j) % 2 == 0)
+                                        board[i][j].setFillColor(sf::Color::White);
+                                    else
+                                        board[i][j].setFillColor(sf::Color::Magenta);
+                                }
+                            }
+                        }
+                    }
+
+                    else {
+                        // Select the piece on the clicked position
+                        //if (pieces[boardPos.x][boardPos.y].getFillColor() != sf::Color::Transparent)
+                        if (board1[pos[0]][pos[1]] != nullptr && turn == board1[pos[0]][pos[1]]->GetColor() && !repeatAttack)
+                        {
+                            isPieceSelected = true;
+                            selectedPos = new int[2] {pos[0], pos[1]};
+                            moves = board1[pos[0]][pos[1]]->GetMoves(board1, 8, !turn);
+                            attackMoves = board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, !turn);
+                            if (board1[pos[0]][pos[1]]->isQueen())
+                            {
+                                moves = VectorSum(board1[pos[0]][pos[1]]->GetMoves(board1, 8, turn), moves);
+                                attackMoves = VectorSum(board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, turn), attackMoves);
+                            }
+                            board[pos[1]][pos[0]].setFillColor(sf::Color::Green);
+                            for (int i = 0; i < moves.size(); ++i)
+                                board[moves[i][1]][moves[i][0]].setFillColor(sf::Color::Blue);
+                            for (int i = 0; i < attackMoves.size(); ++i)
+                                board[attackMoves[i][1]][attackMoves[i][0]].setFillColor(sf::Color::Red);
+                        }
+                    }
+                }
+            }
+            return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ mlain()
 {
 
     // Создаём окно windows
@@ -715,7 +1048,8 @@ int main()
     int  typyOfCheckers = 0;
     int  color = 0;
     int complexity = 0;
-    int hardlevel = 1;
+
+
 
     int widthScreen = sf::VideoMode::getDesktopMode().width;
     int hightScreen = sf::VideoMode::getDesktopMode().height;
@@ -754,6 +1088,24 @@ int main()
     {
         Event event;
         while (window.pollEvent(event)) {
+
+
+
+
+            if (IntRect(widthScreen / 2 - 110, hightScreen / 3, 300, 90).contains(Mouse::getPosition(window)) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            { isStart = GamеStart(CountUsers, numberOfRound, typyOfCheckers, color); }
+                //sf::Mouse::isButtonPressed(sf::Mouse::Left)) { isStart = GamеStart(CountUsers, numberOfRound, typyOfCheckers, color); }
+
+            /////////////************///////////
+
+            if (isStart == true) {
+                playCheckers();
+            }
+
+            /////////////************///////////
+
+            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + hightScreen/7, 300, 90).contains(Mouse::getPosition(window)) &&
+                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { complexity = Options(); }
 
             if (event.type == Event::Closed) window.close();
             if (event.type == Event::KeyPressed)
@@ -811,13 +1163,7 @@ int main()
 
 
             if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + hightScreen/7, 300, 90).contains(Mouse::getPosition(window)) &&
-                sf::Mouse::isButtonPressed(sf::Mouse::Left)) {  Options(hardlevel); }
-            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + 2 * (hightScreen/7), 300, 90).contains(Mouse::getPosition(window)) &&
-                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { About_Game(); }
-            if (IntRect(widthScreen / 2 - 110, hightScreen / 3 + 3 * (hightScreen/7), 300, 90).contains(Mouse::getPosition(window)) &&
-                sf::Mouse::isButtonPressed(sf::Mouse::Left)) { window.close(); }
-            //if (event.key.code == Keyboard::Escape) { window.close(); }
-        }
+
 
 
 
@@ -851,7 +1197,7 @@ int main()
 
         window.clear();
         window.draw(background);
-        window.draw(Titul);
+        window.draw(Titul);F
         mymenu.draw();
         window.display();
     }
@@ -868,21 +1214,4 @@ void InitText(Text& mtext, float xpos, float ypos, String str, int size_font,
     mtext.setString(str);
     mtext.setFillColor(menu_text_color);
     mtext.setOutlineThickness(bord);
-    mtext.setOutlineColor(border_color);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    mtext.

@@ -160,3 +160,6 @@ public:
 				else
 					break;
 			}
+			
+			for (int i = 1; _x - i >= 0 && _y - i >= 0; ++i)
+			{

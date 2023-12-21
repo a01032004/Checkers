@@ -152,3 +152,11 @@ public:
 				else
 					break;
 			}
+
+			for (int i = 1; _x - i >= 0 && _y + i < size; ++i)
+			{
+				if (board[_x - i][_y + i] == nullptr)
+					coordsMoves.push_back(new int[2] {_x - i, _y + i});
+				else
+					break;
+			}

@@ -65,3 +65,43 @@ int RussianShushuki(int& CountUsers, std::string& numberOfRound, int& color, std
             board[i][j].setPosition(i * TILE_SIZE + 600, j * TILE_SIZE + 200);                                          /////////////////////*********/////////
         }
     }
+
+
+    int* selectedPos = new int [2] {-1, -1};
+    vector<int*> moves;
+    vector<int*> attackMoves;
+    bool turn = true;
+    bool repeatAttack = false;
+    Clock clock;
+    Clock tempTime;
+    Clock gameTimeClock;//переменная игрового времени, будем здесь хранить время игры
+    int gameTime = 0;//объявили игровое время, инициализировали.
+    int rounds = std::stoi(numberOfRound);
+    bool idk = color == 1 ? false : true;
+
+    while (windowGame.isOpen()) {
+        gameTime = gameTimeClock.getElapsedTime().asSeconds();//игровое время в секундах
+        float time = clock.getElapsedTime().asMicroseconds();
+
+
+        sf::Event eventGame;
+
+        while (windowGame.pollEvent(eventGame)) {
+            if (eventGame.type == sf::Event::Closed)
+                windowGame.close();
+
+            if (eventGame.type == Event::KeyPressed)
+            {
+                int* goPos = new int[2] {};
+                if (CountUsers == 1 && turn == idk)///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                {
+                    std::vector<int*> attackers;
+                    for (int i = 0; i < 8; i++)
+                        for (int j = 0; j < 8; j++)
+                            if (board1[i][j] != nullptr && board1[i][j]->GetColor() == turn && ((board1[i][j]->GetAttackMoves(board1, 8, !turn).size() != 0) || ((board1[i][j]->GetAttackMoves(board1, 8, turn).size() != 0) || ((board1[i][j]->GetAttackMoves(board1, 8, !turn, true)).size() != 0))))
+                                attackers.push_back(new int[2] {i, j });
+                    std::vector<int*> movers;
+                    for (int i = 0; i < 8; i++)
+                        for (int j = 0; j < 8; j++)
+                            if (board1[i][j] != nullptr && board1[i][j]->GetColor() == turn && (board1[i][j]->GetMoves(board1, 8, !turn, true).size() != 0))
+                                movers.push_back(new int[2] {i, j});

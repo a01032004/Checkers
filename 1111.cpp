@@ -59,3 +59,19 @@ public:
 		_x = x; _y = y;
 
 	};
+
+	vector<int*> RussianQueenAttackMoves(Checker*** board, int size)
+	{
+		vector<int*> coordsMoves;
+
+		for (int i = 1; i + _x < size && i + _y < size; ++i)
+		{
+			if (board[_x + i][_y + i] != nullptr && board[_x + i][_y + i]->GetColor() != board[_x][_y]->GetColor())
+			{
+				for (int j = 1; j + i + _x < size && j + i + _y < size && board[_x + i + j][_y + i + j] == nullptr; ++j)
+					coordsMoves.push_back(new int[2] {_x + i + j, _y + i + j});
+				break;
+			}
+			else if (board[_x + i][_y + i] != nullptr && board[_x + i][_y + i]->GetColor() == board[_x][_y]->GetColor())
+				break;
+		}

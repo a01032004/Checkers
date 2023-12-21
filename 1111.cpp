@@ -169,9 +169,11 @@ public:
 					break;
 			}
 		}
+
 		else
 		{
 			if (_y + 1 < size && _x + direction < size && _x + direction >= 0)
+
 				if (board[_x + direction][_y + 1] == nullptr)
 					coordsMoves.push_back(new int[2] { _x + direction, _y + 1 });
 
@@ -180,4 +182,5 @@ public:
 					coordsMoves.push_back(new int[2] { _x + direction, _y - 1 });
 		}
 		return coordsMoves;
+
 	}

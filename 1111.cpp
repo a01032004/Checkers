@@ -172,3 +172,52 @@ int RussianShushuki(int& CountUsers, std::string& numberOfRound, int& color, std
                     {
                         board1[pos[0]][pos[1]]->SetQueen();
                     }
+
+                    else
+                    {
+                        isPieceSelected = false; //конец хода.
+                        turn = !turn;
+                        repeatAttack = false;
+                        for (int i = 0; i < BOARD_SIZE; i++) // в отдельную функцию.
+                        {
+                            for (int j = 0; j < BOARD_SIZE; j++)
+                            {
+                                if ((i + j) % 2 == 0)
+                                    board[i][j].setFillColor(sf::Color::White);
+                                else
+                                    board[i][j].setFillColor(sf::Color::Red);
+                            }
+                        }
+                    }
+                }
+
+                else {
+                    if (board1[pos[0]][pos[1]] != nullptr && turn == board1[pos[0]][pos[1]]->GetColor() && !repeatAttack && (!hasAttack || ((board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, !turn).size() != 0) || ((board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, turn)).size() != 0 || (board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, !turn, true).size() != 0)))))
+                    {
+
+                        isPieceSelected = true;
+                        selectedPos = new int[2] {pos[0], pos[1]};
+
+                        if (!hasAttack)
+                        {
+                            moves = board1[pos[0]][pos[1]]->GetMoves(board1, 8, !turn, true);
+
+                            for (int i = 0; i < moves.size(); ++i)
+                                board[moves[i][1]][moves[i][0]].setFillColor(sf::Color::Blue);
+                        }
+                        else
+                        {
+                            attackMoves = VectorSum(board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, !turn), board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, turn));
+
+                            if (board1[pos[0]][pos[1]]->isQueen())
+                                attackMoves = VectorSum(board1[pos[0]][pos[1]]->GetAttackMoves(board1, 8, turn, true), attackMoves);
+                            for (int i = 0; i < attackMoves.size(); ++i)
+                                board[attackMoves[i][1]][attackMoves[i][0]].setFillColor(sf::Color::Yellow);
+                        }
+                        board[pos[1]][pos[0]].setFillColor(sf::Color::Green);
+
+
+                    }
+                }
+            }
+        }

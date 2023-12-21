@@ -270,3 +270,44 @@ int RussianShushuki(int& CountUsers, std::string& numberOfRound, int& color, std
             return 2222;
         }
         }
+
+
+
+        for (int i = 0; i < BOARD_SIZE; i++)
+            for (int j = 0; j < BOARD_SIZE; j++)
+                pieces[i][j].setFillColor(sf::Color::Transparent);
+
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (board1[j][i] != nullptr && board1[j][i]->GetColor() == true) { // otdelynaya function pzlst
+                    pieces[i][j].setRadius(TILE_SIZE / 2 - 10);
+                    pieces[i][j].setFillColor(sf::Color::White);
+                    pieces[i][j].setPosition(i * TILE_SIZE + 610, j * TILE_SIZE + 210);
+                }
+
+                if (board1[j][i] != nullptr && board1[j][i]->GetColor() == false) {
+                    pieces[i][j].setRadius(TILE_SIZE / 2 - 10);
+                    pieces[i][j].setFillColor(sf::Color::Black);
+                    pieces[i][j].setPosition(i * TILE_SIZE + 610, j * TILE_SIZE + 210);
+                }
+            }
+        }
+
+        for (int i = 0; i < BOARD_SIZE; i++)
+        {
+            for (int j = 0; j < BOARD_SIZE; j++)
+            {
+                windowGame.draw(board[i][j]);
+
+                if (pieces[i][j].getFillColor() != sf::Color::Transparent)
+                    windowGame.draw(pieces[i][j]);
+            }
+        }
+
+
+        windowGame.display();
+
+    }
+
+    return 0;
+}

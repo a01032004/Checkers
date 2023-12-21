@@ -163,3 +163,21 @@ public:
 			
 			for (int i = 1; _x - i >= 0 && _y - i >= 0; ++i)
 			{
+				if (board[_x - i][_y - i] == nullptr)
+					coordsMoves.push_back(new int[2] {_x - i, _y - i});
+				else
+					break;
+			}
+		}
+		else
+		{
+			if (_y + 1 < size && _x + direction < size && _x + direction >= 0)
+				if (board[_x + direction][_y + 1] == nullptr)
+					coordsMoves.push_back(new int[2] { _x + direction, _y + 1 });
+
+			if (_y - 1 >= 0 && _x + direction < size && _x + direction >= 0)
+				if (board[_x + direction][_y - 1] == nullptr)
+					coordsMoves.push_back(new int[2] { _x + direction, _y - 1 });
+		}
+		return coordsMoves;
+	}

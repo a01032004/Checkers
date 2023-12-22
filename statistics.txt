@@ -15,7 +15,4 @@ guest1 VS guest2    with score:   0:1
 guest1 VS Bot4    with score:   0:1
 guest1 VS Bot4    with score:   0:1
 guest1 VS Bot4    with score:   0:1
-guest1 VS guest2    with score:   0:0
-guest1 VS Bot4    with score:   0:0
-
-
+guest1 VS guest2    with score:   0:1
